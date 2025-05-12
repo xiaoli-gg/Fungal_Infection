@@ -10,7 +10,7 @@ model = joblib.load('RF_model.pkl')
 
 # 特征范围定义（根据提供的特征范围和数据类型）
 feature_ranges = {
-    "Age": {"type": "numerical", "min": 20.0 "max": 100.0, "default": 50.0},
+    "Age": {"type": "numerical", "min": 20.0, "max": 100.0, "default": 50.0},
 #    "Age": {"type": "numerical", "min": 0.0, "max": 14417.0, "default": 5000.0},
     "Type2_Diabetes": {"type": "categorical", "options": [0, 1]},
     "Glucocorticoids_Use": {"type": "categorical", "options": [0, 1]},
