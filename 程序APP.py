@@ -6,30 +6,21 @@ import shap
 import matplotlib.pyplot as plt
 
 # 加载保存的随机森林模型
-model = joblib.load('Bag_model.pkl')
+model = joblib.load('RF_model.pkl')
 
 # 特征范围定义（根据提供的特征范围和数据类型）
 feature_ranges = {
-    "Surgery": {"type": "categorical", "options": [0, 1, 2, 3]},
-#    "Age": {"type": "categorical", "min": 0.0, "max": 14417.0, "default": 5000.0},
-    "Age": {"type": "categorical", "options": [0, 1]},
-    "T": {"type": "categorical", "options": [0, 1, 2, 3, 4]},
-    "N": {"type": "categorical", "options": [0, 1, 2]},
-    "Tumor_Size": {"type": "categorical", "options": [0, 1, 2]},
+    "Age": {"type": "numerical", "min": 20.0 "max": 100.0, "default": 50.0},
+#    "Age": {"type": "numerical", "min": 0.0, "max": 14417.0, "default": 5000.0},
+    "Type2_Diabetes": {"type": "categorical", "options": [0, 1]},
+    "Glucocorticoids_Use": {"type": "categorical", "options": [0, 1]},
+    "Multi_Antibiotics_3plus": {"type": "categorical", "options": [0, 1]},
+    "Bronchoscopy": {"type": "categorical", "options": [0, 1]},
 }
 
 # 设置标题
-st.set_page_config(page_title='AI-assisted Lung Metastasis Prediction Tool')
-st.title("Artificial intelligence-assisted Lung metastasis and prognosis model for patients with GCTB")
-
-# 定义特征范围
-feature_ranges = {
-    "Surgery": {"type": "categorical", "options": [0, 1, 2, 3]},
-    "Age": {"type": "categorical", "options": [0, 1]},
-    "T": {"type": "categorical", "options": [0, 1, 2, 3, 4]},
-    "N": {"type": "categorical", "options": [0, 1, 2]},
-    "Tumor_Size": {"type": "categorical", "options": [0, 1, 2]},
-}
+st.set_page_config(page_title='AI-assisted Secondary Pulmonary Fungal Infections Prediction Tool')
+st.title("AI-Assisted Prediction of Secondary Pulmonary Fungal Infections in Patients with Severe Pneumonia")
 
 # 左侧输入面板
 st.sidebar.header("Enter the following feature values:")
@@ -71,7 +62,7 @@ if st.button("Predict"):
     probability = predicted_proba[1] * 100  # 二分类中通常 [1] 为“阳性”类
 
     # 显示预测结果
-    text = f"Predicted probability of Lung Metastasis: {probability:.2f}%"
+    text = f"Predicted probability of Secondary Pulmonary Fungal Infections: {probability:.2f}%"
     fig, ax = plt.subplots(figsize=(8, 1))
     ax.text(0.5, 0.5, text, fontsize=16, ha='center', va='center',
             fontname='Times New Roman', transform=ax.transAxes)
@@ -89,7 +80,7 @@ if st.button("Predict"):
     plt.figure(figsize=(10, 3))
 
     # 创建水平条形图
-    bars = plt.barh(['Not Metastasis', 'Metastasis'], 
+    bars = plt.barh(['Not Fungal Infections', 'Fungal Infections'], 
                     [sample_prob['Class_0'], sample_prob['Class_1']], 
                     color=['#512b58', '#fe346e'])
 
